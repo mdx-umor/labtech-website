@@ -3,38 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Labtech Ltd. — Testing &amp; Inspection, Dhaka</title>
-<meta name="description" content="Labtech Ltd. is an international testing and inspection company in Dhaka, Bangladesh. Physical and chemical testing and on-site inspections for textiles, garments, leather, shoes, bags and toys.">
-<meta name="theme-color" content="#101b3a">
+<title>Labtech Ltd. — Textile Testing &amp; Inspection Services, Dhaka</title>
+<meta name="description" content="Labtech Ltd. is an international textile testing and inspection company in Dhaka, Bangladesh, accredited to ISO/IEC 17025 and ISO/IEC 17020. Physical and chemical testing and on-site inspections for textiles, garments, leather, shoes, bags and toys.">
+<meta name="theme-color" content="#01064a">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="assets/css/styles.css">
-<script>
-  (function () {
-    try {
-      var t = localStorage.getItem('labtech-theme');
-      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      document.documentElement.dataset.theme = t;
-    } catch (e) { document.documentElement.dataset.theme = 'light'; }
-  })();
-</script>
+<script>document.documentElement.classList.add('is-intro')</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
+<div id="intro" aria-hidden="true">
+  <canvas></canvas>
+  <div id="introLogo"><img class="full" src="assets/img/logo.svg" alt=""><img class="mark" src="assets/img/logo-mark.svg" alt=""></div>
+</div>
+
 <header class="nav" id="nav">
-  <a class="brand" href="#top" aria-label="Labtech Ltd. home">
-    <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
-      <rect x="1" y="1" width="30" height="30" rx="7" fill="currentColor"/>
-      <g stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round">
-        <path d="M10 6v7M10 19v7M16 6v1M16 13v6M16 25v1M22 6v7M22 19v7"/>
-        <path d="M6 10h1M13 10h6M25 10h1M6 16h7M19 16h7M6 22h1M13 22h6M25 22h1" stroke="var(--signal)"/>
-      </g>
-    </svg>
-    <span class="brand-word">LABTECH<small>LTD.</small></span>
-  </a>
+  <a class="brand" href="#top" aria-label="Labtech Ltd. home"><img id="navLogo" src="assets/img/logo-mark.svg" alt="Labtech" width="186" height="40" style="visibility:hidden"></a>
   <nav class="nav-links" id="navLinks" aria-label="Primary">
     <a href="#services">Services</a>
     <a href="#bench">Lab bench</a>
@@ -45,58 +31,58 @@
     <a href="#accreditation">Accreditation</a>
   </nav>
   <div class="nav-actions">
-    <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch colour theme">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7a5 5 0 0 0 0 10z" fill="currentColor"/><path d="M12 1.5v2.5M12 20v2.5M1.5 12H4M20 12h2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-    </button>
     <a class="btn btn-small" href="#contact">Request a test</a>
-    <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-    </button>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span></button>
   </div>
 </header>
 
 <main id="main">
 
-<!-- ───────────── HERO ───────────── -->
-<section class="hero" id="top">
-  <div class="hero-copy">
-    <p class="eyebrow"><span class="dot"></span> International testing &amp; inspection · Dhaka, Bangladesh</p>
-    <h1>Every thread,<br><span class="hl">put to the test.</span></h1>
-    <p class="lede">Labtech Ltd. tests and inspects textiles, garments, leather, shoes, bags and toys — physically, chemically and on the factory floor — so what ships is what was specified.</p>
-    <div class="hero-cta">
-      <a class="btn" href="#contact">Request a test or inspection</a>
-      <a class="btn btn-ghost" href="#bench">Try the lab bench ↓</a>
-    </div>
-    <ul class="hero-badges" aria-label="Accreditations">
-      <li><b>ISO/IEC 17025:2017</b><span>Testing laboratory</span></li>
-      <li><b>ISO/IEC 17020:2012</b><span>Type A inspection body</span></li>
-    </ul>
-  </div>
-  <div class="hero-specimen">
-    <div class="specimen-frame">
-      <div class="specimen-head">
-        <span>SPECIMEN 001 · TEAR TEST</span>
-        <span id="weaveReadout">drag the fabric · pull hard to tear it</span>
-      </div>
-      <canvas id="weave" aria-label="Interactive 3D fabric specimen clamped at the top. Drag to stretch it; pulling hard tears the yarns." role="img"></canvas>
-      <div class="specimen-foot">
-        <span class="ruler" aria-hidden="true"></span>
-        <div class="weave-controls" role="group" aria-label="Weave structure">
-          <button type="button" class="chip is-on" data-weave="plain">Plain</button>
-          <button type="button" class="chip" data-weave="twill">Twill 2/1</button>
-          <button type="button" class="chip" data-weave="satin">Satin</button>
-          <button type="button" class="chip" id="weaveReset">↺ New</button>
+<!-- ───────────── STAGE: scroll-driven tensile test ───────────── -->
+<section class="stage" id="stage">
+  <div class="stage-pin" id="top">
+    <div class="stage-stripes" aria-hidden="true"></div>
+    <canvas id="cloth" role="img" aria-label="A denim specimen clamped in a tensile tester. Scrolling stretches it until it tears."></canvas>
+    <p class="stage-tag"><span>Specimen LT-001</span><span>Denim · 3/1 twill</span><span>Strip test · ISO 13934-1</span></p>
+
+    <div class="caps">
+      <div class="cap is-on">
+        <h1>We find the <em>breaking point.</em></h1>
+        <p class="lede">Labtech Ltd. tests and inspects textiles, garments, leather, shoes, bags and toys from Dhaka — in the laboratory and on the factory floor — so what ships is what was specified.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#contact">Request a test or inspection</a>
+          <a class="btn btn-ghost" href="#services">What we do</a>
         </div>
       </div>
+      <div class="cap">
+        <h2 class="h1">Clamped. <em>Loaded.</em></h2>
+        <p class="lede">You are the tensile tester now. Keep scrolling: the jaws move apart at constant speed while the load cell listens.</p>
+      </div>
+      <div class="cap">
+        <h2 class="h1">Every yarn <em>carries the load.</em></h2>
+        <p class="lede">The weakest yarns let go first. One by one they hand their share to their neighbours — until the neighbours cannot take it.</p>
+      </div>
+      <div class="cap">
+        <h2 class="h1">Better here <em>than out there.</em></h2>
+        <p class="lede">That number goes into the test report. Whether it is enough for your product is the question Labtech answers every day.</p>
+      </div>
     </div>
+
+    <aside class="gauge" aria-label="Tensile tester readout">
+      <div class="g-row">
+        <div><span>Force</span><b><i id="gForce">000</i> N</b></div>
+        <div><span>Elongation</span><b><i id="gElong">0.0</i> %</b></div>
+      </div>
+      <svg viewBox="0 0 150 62" preserveAspectRatio="none" aria-hidden="true"><path class="g-grid" d="M0 60H150M0 40H150M0 20H150"/><path id="gCurve" d="M0 60"/></svg>
+      <p id="gState" role="status">Specimen clamped</p>
+    </aside>
+
+    <p class="scroll-hint" aria-hidden="true"><span></span>Scroll to load the specimen</p>
   </div>
 </section>
 
-<div class="ticker" aria-hidden="true">
-  <div class="ticker-track" id="ticker"></div>
-</div>
+<div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
 
-<!-- ───────────── FACTS ───────────── -->
 <section class="facts wrap" aria-label="Labtech at a glance">
   <div class="fact reveal"><b>2</b><span>international accreditations — testing and inspection</span></div>
   <div class="fact reveal"><b>6</b><span>product groups: textile, garments, leather, shoes, bags, toys</span></div>
@@ -104,16 +90,15 @@
   <div class="fact reveal"><b>2</b><span>connected sites — Dhaka and Quakenbrück, Germany</span></div>
 </section>
 
-<!-- ───────────── SERVICES ───────────── -->
 <section class="section wrap" id="services">
   <header class="sec-head reveal">
-    <p class="kicker">01 — What we do</p>
-    <h2>One lab. One inspection team. Zero guesswork.</h2>
+    <p class="kicker"><b>01</b>What we do</p>
+    <h2>One lab. One inspection team. <em>Zero guesswork.</em></h2>
     <p>Testing tells you what a product is made of and how it behaves. Inspection tells you whether the production run matches. Labtech does both, independently and impartially.</p>
   </header>
   <div class="svc-grid">
-    <article class="svc reveal" data-tilt>
-      <div class="svc-ico" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 24h10M30 24h10" stroke-width="3"/><rect x="18" y="14" width="12" height="20" rx="2"/><path d="M4 18v12M44 18v12" stroke-width="3"/></svg></div>
+    <article class="svc reveal">
+      <span class="svc-n">A</span>
       <h3>Physical testing</h3>
       <p>How a material holds up when it is pulled, rubbed, washed and worn.</p>
       <ul>
@@ -126,8 +111,8 @@
       </ul>
       <a href="#bench" class="more">Run a simulated test →</a>
     </article>
-    <article class="svc reveal" data-tilt>
-      <div class="svc-ico" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M19 6h10M21 6v13L10 38a3 3 0 0 0 2.6 4.5h22.8A3 3 0 0 0 38 38L27 19V6"/><path d="M15 31h18" /><circle cx="22" cy="36" r="1.5"/><circle cx="28" cy="34" r="1"/></svg></div>
+    <article class="svc reveal">
+      <span class="svc-n">B</span>
       <h3>Chemical testing</h3>
       <p>What is in the product — and whether it is safe against the limits of your market.</p>
       <ul>
@@ -140,8 +125,8 @@
       </ul>
       <a href="#xray" class="more">See where substances hide →</a>
     </article>
-    <article class="svc reveal" data-tilt>
-      <div class="svc-ico" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="15" r="8"/><circle cx="21" cy="14" r="1.2"/><circle cx="27" cy="14" r="1.2"/><ellipse cx="24" cy="33" rx="10" ry="11"/><circle cx="16" cy="8" r="3"/><circle cx="32" cy="8" r="3"/></svg></div>
+    <article class="svc reveal">
+      <span class="svc-n">C</span>
       <h3>Toy testing</h3>
       <p>Toys get the strictest look: small parts, flames and anything a child might put in their mouth.</p>
       <ul>
@@ -152,8 +137,8 @@
       </ul>
       <a href="#xray" class="more" data-xray="toy">Open the toy X-ray →</a>
     </article>
-    <article class="svc reveal" data-tilt>
-      <div class="svc-ico" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="8" y="8" width="32" height="34" rx="3"/><path d="M18 8V5h12v3M15 19l3 3 5-6M15 31l3 3 5-6M28 20h7M28 32h7"/></svg></div>
+    <article class="svc reveal">
+      <span class="svc-n">D</span>
       <h3>Inspections</h3>
       <p>Accredited inspectors in the factory, at the moments that decide a shipment.</p>
       <ul>
@@ -168,45 +153,22 @@
 </section>
 
 <!-- ───────────── LAB BENCH ───────────── -->
-<section class="section section-ink" id="bench">
+<section class="section section-navy" id="bench">
   <div class="wrap">
     <header class="sec-head reveal">
-      <p class="kicker">02 — The lab bench</p>
-      <h2>Break something. It's what we do all day.</h2>
-      <p>Three of the tests a fabric meets in the lab, as hands-on simulations. Pick a material and run them yourself.</p>
+      <p class="kicker"><b>02</b>The lab bench</p>
+      <h2>Wear it out. <em>Wash it out.</em></h2>
+      <p>Two more tests a fabric meets in the lab, as hands-on simulations. Pick a material and run them yourself.</p>
     </header>
 
     <div class="bench reveal">
       <div class="tabs" role="tablist" aria-label="Lab bench tests">
-        <button role="tab" id="tab-tensile" aria-controls="panel-tensile" aria-selected="true" class="tab is-on">Tensile strength</button>
-        <button role="tab" id="tab-abrasion" aria-controls="panel-abrasion" aria-selected="false" class="tab" tabindex="-1">Martindale abrasion</button>
+        <button role="tab" id="tab-abrasion" aria-controls="panel-abrasion" aria-selected="true" class="tab is-on">Martindale abrasion</button>
         <button role="tab" id="tab-wash" aria-controls="panel-wash" aria-selected="false" class="tab" tabindex="-1">Wash fastness</button>
       </div>
 
-      <!-- Tensile -->
-      <div class="panel" role="tabpanel" id="panel-tensile" aria-labelledby="tab-tensile">
-        <div class="panel-rig">
-          <canvas id="tensileRig" role="img" aria-label="Tensile tester pulling a fabric strip"></canvas>
-        </div>
-        <div class="panel-body">
-          <p class="panel-intro">A strip of fabric is clamped between two jaws and pulled apart at constant speed until it breaks. The curve shows how much force it took.</p>
-          <div class="ctl-row" role="group" aria-label="Material" id="tensileMats"></div>
-          <canvas id="tensileChart" class="chart" width="560" height="240" role="img" aria-label="Force–elongation curve"></canvas>
-          <div class="readouts">
-            <div><span>Force</span><b id="tForce">0 N</b></div>
-            <div><span>Elongation</span><b id="tElong">0.0 %</b></div>
-            <div><span>Status</span><b id="tStatus">Ready</b></div>
-          </div>
-          <div class="ctl-row">
-            <button class="btn" id="tRun" type="button">Start pulling</button>
-            <button class="btn btn-ghost" id="tReset" type="button">New specimen</button>
-          </div>
-          <p class="std">Typical method: ISO 13934-1 strip test</p>
-        </div>
-      </div>
-
       <!-- Abrasion -->
-      <div class="panel" role="tabpanel" id="panel-abrasion" aria-labelledby="tab-abrasion" hidden>
+      <div class="panel" role="tabpanel" id="panel-abrasion" aria-labelledby="tab-abrasion">
         <div class="panel-rig">
           <canvas id="abrasionRig" width="300" height="300" role="img" aria-label="Martindale abrasion path drawing a Lissajous figure on a fabric specimen"></canvas>
         </div>
@@ -259,10 +221,11 @@
 </section>
 
 <!-- ───────────── X-RAY ───────────── -->
-<section class="section wrap" id="xray">
+<section class="section section-tint wrap-outer" id="xray">
+<div class="wrap">
   <header class="sec-head reveal">
-    <p class="kicker">03 — Product X-ray</p>
-    <h2>Where the risks hide.</h2>
+    <p class="kicker"><b>03</b>Product X-ray</p>
+    <h2>Where the risks <em>hide.</em></h2>
     <p>Every product is a stack of materials, and each one has its own failure modes. Pick a product and tap the markers to see what a lab looks for.</p>
   </header>
   <div class="xray reveal">
@@ -283,14 +246,15 @@
     </aside>
   </div>
   <p class="disclaimer">Examples of commonly applied methods. The tests that apply to your product depend on its materials, age group and destination market.</p>
+</div>
 </section>
 
 <!-- ───────────── AQL ───────────── -->
-<section class="section section-tint" id="aql">
+<section class="section" id="aql">
   <div class="wrap">
     <header class="sec-head reveal">
-      <p class="kicker">04 — AQL sampling calculator</p>
-      <h2>How many pieces does an inspector actually check?</h2>
+      <p class="kicker"><b>04</b>AQL sampling calculator</p>
+      <h2>How many pieces does an inspector <em>actually check?</em></h2>
       <p>Final random inspections follow ISO 2859-1 (ANSI/ASQ Z1.4). Enter your order size and see the sample size and the accept/reject limits — then simulate an inspection.</p>
     </header>
     <div class="aql reveal">
@@ -342,10 +306,11 @@
 </section>
 
 <!-- ───────────── INSPECTIONS ───────────── -->
-<section class="section wrap" id="inspections">
+<section class="section section-tint wrap-outer" id="inspections">
+<div class="wrap">
   <header class="sec-head reveal">
-    <p class="kicker">05 — Inspections</p>
-    <h2>Walk the production line.</h2>
+    <p class="kicker"><b>05</b>Inspections</p>
+    <h2>Walk the <em>production line.</em></h2>
     <p>Drag the order through production and see where Labtech's inspectors step in — and what they check when they do.</p>
   </header>
   <div class="line reveal">
@@ -384,14 +349,15 @@
       </article>
     </div>
   </div>
+</div>
 </section>
 
 <!-- ───────────── NETWORK ───────────── -->
-<section class="section section-ink" id="network">
+<section class="section section-navy" id="network">
   <div class="wrap net">
     <div class="net-copy reveal">
-      <p class="kicker">06 — Network</p>
-      <h2>Close to the factories. Connected to Europe.</h2>
+      <p class="kicker"><b>06</b>Network</p>
+      <h2>Close to the factories. <em>Connected to Europe.</em></h2>
       <p>Labtech Ltd. works from Dhaka, in the middle of the world's second-largest garment-exporting country, in continuous exchange with its sister laboratory Labtech Prüfungsgesellschaft mbH in Quakenbrück, Germany.</p>
       <ul class="net-list" id="netList"></ul>
     </div>
@@ -405,8 +371,8 @@
 <!-- ───────────── ACCREDITATION ───────────── -->
 <section class="section wrap" id="accreditation">
   <header class="sec-head reveal">
-    <p class="kicker">07 — Accreditation</p>
-    <h2>Independently verified. Twice.</h2>
+    <p class="kicker"><b>07</b>Accreditation</p>
+    <h2>Independently verified. <em>Twice.</em></h2>
     <p>A test report is only as good as the lab behind it. Labtech's competence is assessed by national accreditation bodies against the two international standards that matter for this work.</p>
   </header>
   <div class="acc-grid">
@@ -438,8 +404,8 @@
 <section class="section section-tint" id="contact">
   <div class="wrap contact">
     <div class="reveal">
-      <p class="kicker">08 — Request</p>
-      <h2>Tell us what needs testing.</h2>
+      <p class="kicker"><b>08</b>Request</p>
+      <h2>Tell us what needs <em>testing.</em></h2>
       <p>Build your request below. It opens as a ready-to-send email, so nothing is submitted until you press send.</p>
       <form class="req" id="reqForm">
         <fieldset><legend>Product</legend><div class="chips" id="reqProduct"></div></fieldset>
@@ -475,7 +441,8 @@
 <footer class="footer">
   <div class="wrap footer-in">
     <div>
-      <span class="brand-word">LABTECH<small>LTD.</small></span>
+      <img src="assets/img/logo-mark-white.svg" alt="Labtech" width="220" height="47">
+      <p class="tagline">TEXTILE TESTING &amp; INSPECTION SERVICES</p>
       <p>International testing &amp; inspection company.<br>ISO/IEC 17025:2017 · ISO/IEC 17020:2012</p>
     </div>
     <nav aria-label="Footer">

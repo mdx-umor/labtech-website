@@ -1,5 +1,6 @@
 import { COMPANY, SITES, TICKER, REQUEST } from './config.js';
-import { initHero } from './hero.js';
+import { initIntro } from './intro.js';
+import { initSpecimen } from './specimen.js';
 import { initBench } from './bench.js';
 import { initXray } from './xray.js';
 import { initAql } from './aql.js';
@@ -10,15 +11,11 @@ const safe = (fn) => { try { fn(); } catch (e) { console.error(e); } };
 /* ── Nav, theme, reveal ── */
 function initChrome() {
   const nav = $('nav'), links = $('navLinks'), menu = $('menuBtn');
-  addEventListener('scroll', () => nav.classList.toggle('is-stuck', scrollY > 8), { passive: true });
+  const stage = $('stage');
+  const stick = () => { nav.classList.toggle('is-stuck', scrollY > 8); nav.classList.toggle('is-solid', !stage || stage.getBoundingClientRect().bottom < 80); };
+  addEventListener('scroll', stick, { passive: true }); stick();
   menu.addEventListener('click', () => menu.setAttribute('aria-expanded', links.classList.toggle('is-open')));
   links.addEventListener('click', (e) => { if (e.target.tagName === 'A') { links.classList.remove('is-open'); menu.setAttribute('aria-expanded', false); } });
-
-  $('themeBtn').addEventListener('click', () => {
-    const t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-    document.documentElement.dataset.theme = t;
-    try { localStorage.setItem('labtech-theme', t); } catch (e) { /* private mode */ }
-  });
 
   const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
@@ -125,4 +122,4 @@ function initRequest() {
   $('cFb').href = COMPANY.facebook;
 }
 
-[initChrome, initHero, initBench, initXray, initAql, initLine, initMap, initRequest].forEach(safe);
+[initIntro, initChrome, initSpecimen, initBench, initXray, initAql, initLine, initMap, initRequest].forEach(safe);
