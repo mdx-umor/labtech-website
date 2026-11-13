@@ -1,4 +1,4 @@
-import { COMPANY, SITES, REQUEST } from './config.js';
+import { COMPANY, SITES, TICKER, REQUEST } from './config.js';
 import { initIntro } from './intro.js';
 import { initSpecimen } from './specimen.js';
 import { initBench } from './bench.js';
@@ -26,6 +26,7 @@ function initChrome() {
   }), { rootMargin: '-45% 0px -50% 0px' });
   anchors.forEach((a) => { const s = document.querySelector(a.hash); if (s) spy.observe(s); });
 
+  $('ticker').innerHTML = [...TICKER, ...TICKER].map((s) => `<span>${s}</span>`).join('');
   $('year').textContent = new Date().getFullYear();
 }
 

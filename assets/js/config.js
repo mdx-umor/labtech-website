@@ -16,6 +16,12 @@ export const SITES = [
   ['China', 'On-site inspections', 113.5, 29.5, 12, -10],
 ];
 
+export const TICKER = [
+  'ISO/IEC 17025:2017', 'ISO/IEC 17020:2012 Type A', 'ISO 2859-1 AQL', 'EN 71-1 · 71-2 · 71-3', 'ISO 6330 washing',
+  'ISO 13934-1 tensile', 'ISO 12947 Martindale', 'ISO 105 colour fastness', 'EN ISO 14362 azo dyes', 'ISO 14389 phthalates',
+  'EN 16732 zippers', 'ISO 17075 chromium VI', 'DIN 53160 saliva & perspiration',
+];
+
 export const REQUEST = {
   product: ['Textile / fabric', 'Garments', 'Leather', 'Shoes', 'Bags', 'Toys'],
   service: ['Physical testing', 'Chemical testing', 'Inline inspection', 'Final random inspection', 'Loading check'],

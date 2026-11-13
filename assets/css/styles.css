@@ -321,6 +321,94 @@ address a:hover { text-decoration-color: var(--navy); }
 .reveal.is-in { opacity: 1; transform: none; }
 
 /* ── Responsive ── */
+
+/* ── Motion & interaction ── */
+/* Buttons: brand stripes wipe across on hover, a small press on click */
+.btn { position: relative; overflow: hidden; isolation: isolate; }
+.btn::after { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--stripes); color: rgba(255, 255, 255, .22); transform: translateX(-101%); transition: transform .45s var(--ease); }
+.btn:hover::after { content: ""; transform: none; }
+.btn-ghost::after { content: ""; color: rgba(1, 6, 74, .14); }
+.section-navy .btn::after { content: ""; color: rgba(1, 6, 74, .16); }
+.section-navy .btn-ghost::after { color: rgba(255, 255, 255, .2); }
+.btn:active { transform: scale(.97); }
+.chip { transition: background-color .16s var(--ease), border-color .16s var(--ease), color .16s var(--ease), transform .16s var(--ease); }
+.chip:hover { border-color: var(--navy); }
+.section-navy .chip:hover, .xray-stage .chip:hover { border-color: #fff; background: transparent; }
+.chip:active { transform: scale(.96); }
+.tab { position: relative; }
+.tab::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--navy); transform: scaleX(0); transition: transform .35s var(--ease); }
+.tab.is-on::after { transform: none; }
+.section-navy .tab::after { background: var(--steel); }
+
+/* Navigation underline grows from the left */
+.nav-links a::after { opacity: 1; height: 2px; transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease); }
+.nav-links a:hover::after, .nav-links a.is-active::after { transform: none; }
+
+/* Service cards: navy rises from the bottom on hover */
+.svc { position: relative; overflow: hidden; }
+.svc::before { content: ""; position: absolute; inset: 0; background: var(--navy); transform: translateY(101%); transition: transform .5s var(--ease); z-index: 0; }
+.svc > * { position: relative; }
+.svc:hover { background: transparent; }
+.svc:hover::before { transform: none; }
+.svc h3, .svc p, .svc li, .svc .more, .svc-n { transition: color .35s var(--ease); }
+.svc:hover h3, .svc:hover p, .svc:hover li, .svc:hover .more { color: #fff; }
+.svc:hover .svc-n { color: var(--steel); }
+.svc:hover li { border-top-color: rgba(255, 255, 255, .16); }
+.more { display: inline-flex; gap: 6px; }
+.more::after { content: "→"; transition: transform .25s var(--ease); }
+.svc:hover .more::after, .more:hover::after { transform: translateX(4px); }
+
+/* Scroll hint line drops */
+.scroll-hint span { background: var(--navy); transform-origin: top; animation: drop 1.6s var(--ease) infinite; }
+@keyframes drop { 0% { transform: scaleY(0); } 60% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
+
+/* Standards ticker */
+.ticker { background: var(--navy); color: #fff; overflow: hidden; }
+.ticker-track { display: flex; gap: 40px; width: max-content; padding: 16px 0; animation: tick 50s linear infinite; font: 500 .9375rem var(--display); }
+.ticker:hover .ticker-track { animation-play-state: paused; }
+.ticker-track span::before { content: ""; display: inline-block; width: 16px; height: 8px; margin-right: 40px; background: var(--stripes); color: var(--steel); }
+@keyframes tick { to { transform: translateX(-50%); } }
+
+/* X-ray: drawing pops in, markers ping */
+.xray-canvas svg { animation: xr .5s var(--ease); }
+@keyframes xr { from { opacity: 0; transform: scale(.95); } }
+.hot::after { border: 1.5px solid #fff; opacity: .5; animation: ping 2.2s infinite; }
+.hot:hover::before { transform: scale(1.15); }
+@keyframes ping { to { transform: scale(1.7); opacity: 0; } }
+
+/* Production line cards lift when their stage is active */
+.lcard { transition: opacity .4s var(--ease), background-color .4s var(--ease), color .4s var(--ease), transform .4s var(--ease); }
+.lcard.is-on { transform: translateY(-8px); box-shadow: 0 24px 40px -28px rgba(1, 6, 74, .6); }
+
+/* Network map: shipments flow along the routes, sites pulse */
+#netMap .arc { stroke-dasharray: 4 6; animation: dash 1.4s linear infinite; }
+#netMap .arc.main { animation: none; }
+@keyframes dash { to { stroke-dashoffset: -20; } }
+#netMap .node circle { transition: r .2s var(--ease); }
+#netMap .node .halo { opacity: .5; animation: halo 2.4s infinite; transform-box: fill-box; transform-origin: center; }
+#netMap .node.hq .halo { color: #fff; }
+@keyframes halo { to { transform: scale(2.8); opacity: 0; } }
+.net-list li { transition: padding .3s var(--ease), background-color .2s var(--ease); }
+.net-list li:hover, .net-list li.is-on { padding-left: 12px; }
+
+/* Accreditation seals turn slowly, faster on hover */
+.seal svg { animation: spin 50s linear infinite; }
+.seal text { animation: spin 50s linear infinite reverse; transform-origin: 60px 60px; }
+.acc:hover .seal svg, .acc:hover .seal text { animation-duration: 8s; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Sections rise in, a little further */
+.reveal { transform: translateY(24px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.cap { transform: translateY(20px); transition: opacity .5s var(--ease), transform .6s var(--ease); }
+.facts .fact:nth-child(2) { transition-delay: .06s; } .facts .fact:nth-child(3) { transition-delay: .12s; } .facts .fact:nth-child(4) { transition-delay: .18s; }
+.svc-grid .svc:nth-child(2) { transition-delay: .06s; } .svc-grid .svc:nth-child(3) { transition-delay: .12s; } .svc-grid .svc:nth-child(4) { transition-delay: .18s; }
+.svc-grid .svc.is-in { transition-delay: 0s; }
+
+/* Footer and address links */
+.footer nav a { transition: color .16s var(--ease); }
+.footer nav a:hover { color: var(--steel); }
+address a { transition: text-decoration-color .16s var(--ease); }
+
 @media (max-width: 1100px) {
   .nav-links { position: fixed; inset: 0; flex-direction: column; justify-content: center; gap: 4px; background: var(--navy); padding: 80px 32px 32px; margin: 0; transform: translateY(-101%); transition: transform .5s var(--ease); z-index: -1; }
   .nav-links.is-open { transform: none; }
