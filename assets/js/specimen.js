@@ -181,7 +181,7 @@ export function initSpecimen() {
     const f = broken ? 0 : F_MAX * Math.pow(tension, 1.35), e = E_MAX * tension;
     $('gForce').textContent = Math.round(f).toString().padStart(3, '0');
     $('gElong').textContent = e.toFixed(1);
-    $('gState').textContent = broken ? `Rupture · ${F_MAX} N at ${E_MAX} %` : cut ? 'Yarns failing' : tension > 0 ? 'Under load' : p > 0.02 ? 'Taking up slack' : 'Specimen clamped';
+    $('gState').textContent = broken ? `Rupture at ${F_MAX} N, ${E_MAX} %` : cut ? 'Yarns failing' : tension > 0 ? 'Under load' : p > 0.02 ? 'Taking up slack' : 'Specimen clamped';
     let d = 'M0 60';
     for (let s = 0; s <= 40; s++) { const q = s / 40 * (broken ? 1 : tension); d += `L${(q * 150).toFixed(1)} ${(60 - 56 * Math.pow(q, 1.35)).toFixed(1)}`; }
     curve.setAttribute('d', broken ? d + 'L150 60' : d);
@@ -277,7 +277,7 @@ export function initSpecimen() {
     const tan = Math.tan(camera.fov * Math.PI / 360), portrait = camera.aspect < 0.9;
     const needW = portrait ? 4.4 : 6.9, needH = portrait ? 2 : 4.3;
     const z = Math.max(needW / (2 * tan * camera.aspect), needH / (2 * tan)) * (1 - 0.16 * ease(tension) + (broken ? 0.06 : 0));
-    const cy = -(portrait ? 0.27 : 0.2) * z * tan * 2;
+    const cy = -(portrait ? 0.27 : 0.22) * z * tan * 2;
     goal.set(mx * 0.4, cy - my * 0.25, z);
     if (first) { camera.position.copy(goal); first = false; } else camera.position.lerp(goal, 0.06);
     camera.lookAt(0, cy, 0);

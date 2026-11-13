@@ -68,7 +68,7 @@ export function initAql() {
     $('simMajorOut').textContent = (pM * 100).toFixed(1) + ' %';
     $('simMinorOut').textContent = (pm * 100).toFixed(1) + ' %';
     const pa = pAccept(plans.major.n, plans.major.ac, pM) * pAccept(plans.minor.n, plans.minor.ac, pm);
-    $('simOdds').textContent = `A lot of this quality would pass about ${Math.round(pa * 100)} out of 100 inspections. Sampling gives confidence, not certainty — which is why the plan matters.`;
+    $('simOdds').textContent = `A lot of this quality would pass about ${Math.round(pa * 100)} out of 100 inspections. Sampling gives confidence, not certainty, which is why the plan matters.`;
   }
 
   // Each square is one sampled piece; shows at most 500 and scales the rest.
@@ -99,7 +99,7 @@ export function initAql() {
     for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [marks[i], marks[j]] = [marks[j], marks[i]]; }
     const pass = major <= plans.major.ac && minor <= plans.minor.ac;
     const el = $('simResult');
-    el.textContent = `${pass ? 'PASS' : 'FAIL'} — ${major} major (limit ${plans.major.ac}), ${minor} minor (limit ${plans.minor.ac})`;
+    el.textContent = `${pass ? 'Pass' : 'Fail'}: ${major} major (limit ${plans.major.ac}), ${minor} minor (limit ${plans.minor.ac})`;
     el.className = 'sim-result ' + (pass ? 'is-pass' : 'is-fail');
     drawGrid({ marks });
   }
