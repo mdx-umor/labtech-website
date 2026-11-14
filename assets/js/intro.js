@@ -1,5 +1,5 @@
 // Opening: the logo rises through a body of liquid glass, settles, then docks in the top-left corner.
-import { THREE } from './cloth.js';
+import * as THREE from '../vendor/three.module.min.js';
 
 const FRAG = `
 precision highp float;
@@ -72,13 +72,14 @@ void main() {
 export function initIntro() {
   const veil = document.getElementById('intro'), mark = document.getElementById('introLogo'), slot = document.getElementById('navLogo');
   if (!veil) return;
-  const done = () => { veil.remove(); document.documentElement.classList.remove('is-intro'); slot.style.visibility = ''; };
+  const done = () => { veil.remove(); document.documentElement.classList.remove('is-intro'); slot.style.visibility = ''; dispatchEvent(new Event('intro:done')); };
   const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // Dock: slide the centred logo into the nav slot, losing the tagline on the way.
   const dock = () => {
     const a = mark.getBoundingClientRect(), b = slot.getBoundingClientRect();
     veil.classList.add('is-docking');
+    requestAnimationFrame(() => setTimeout(() => dispatchEvent(new Event('intro:docking')), 60));
     mark.style.transform = `translate(${b.left - a.left}px, ${b.top - a.top}px) scale(${b.width / a.width})`;
     setTimeout(done, calm ? 0 : 1000);
   };
@@ -94,7 +95,7 @@ export function initIntro() {
     const tc = document.createElement('canvas'); tc.width = 2048; tc.height = Math.round(2048 * img.height / img.width);
     tc.getContext('2d').drawImage(img, 0, 0, tc.width, tc.height);
     const tex = new THREE.CanvasTexture(tc); tex.colorSpace = THREE.NoColorSpace;
-    const dpr = Math.min(devicePixelRatio, 2);
+    const dpr = Math.min(devicePixelRatio, 1.25); // soft glass doesn't need full density, and full-screen shading is costly
     const uni = { uTex: { value: tex }, uRes: { value: new THREE.Vector2() }, uLogo: { value: new THREE.Vector2() }, uP: { value: 0 }, uT: { value: 0 } };
     const scene = new THREE.Scene(), cam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
     scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.ShaderMaterial({ uniforms: uni, fragmentShader: FRAG, vertexShader: 'void main(){gl_Position=vec4(position.xy,0.,1.);}' })));

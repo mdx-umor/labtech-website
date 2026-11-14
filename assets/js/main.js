@@ -1,12 +1,32 @@
-import { COMPANY, SITES, TICKER, REQUEST } from './config.js';
-import { initIntro } from './intro.js';
-import { initSpecimen } from './specimen.js';
-import { initBench } from './bench.js';
-import { initXray } from './xray.js';
-import { initAql } from './aql.js';
+import { COMPANY, SITES, TICKER, REQUEST } from './config.js?v=6';
+import Lenis from '../vendor/lenis.mjs';
+import { initIntro } from './intro.js?v=6';
+import { initSpecimen } from './specimen.js?v=6';
+import { initBench } from './bench.js?v=6';
+import { initXray } from './xray.js?v=6';
+import { initAql } from './aql.js?v=6';
 
 const $ = (id) => document.getElementById(id);
 const safe = (fn) => { try { fn(); } catch (e) { console.error(e); } };
+
+/* ── Smooth scrolling: wheel input eases to its target instead of jumping (touch stays native) ── */
+function initScroll() {
+  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const lenis = calm ? null : new Lenis({ lerp: 0.09, smoothWheel: true, wheelMultiplier: 0.9, autoRaf: true });
+  const intro = () => document.documentElement.classList.contains('is-intro');
+  if (lenis && intro()) { lenis.stop(); addEventListener('intro:done', () => lenis.start(), { once: true }); }
+  // in-page links glide to their section, clear of the fixed header
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a || a.getAttribute('href') === '#') return;
+    const el = document.querySelector(a.getAttribute('href'));
+    if (!el) return;
+    e.preventDefault();
+    if (lenis) lenis.scrollTo(el, { offset: a.hash === '#top' ? 0 : -72, duration: 1.4 });
+    else el.scrollIntoView();
+    history.replaceState(null, '', a.hash);
+  });
+}
 
 /* ── Nav, theme, reveal ── */
 function initChrome() {
@@ -121,4 +141,4 @@ function initRequest() {
   $('cFb').href = COMPANY.facebook;
 }
 
-[initIntro, initChrome, initSpecimen, initBench, initXray, initAql, initLine, initMap, initRequest].forEach(safe);
+[initIntro, initScroll, initChrome, initSpecimen, initBench, initXray, initAql, initLine, initMap, initRequest].forEach(safe);

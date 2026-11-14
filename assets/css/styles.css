@@ -16,6 +16,10 @@
 }
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+/* Lenis drives smooth scrolling when it is running */
+html.lenis, html.lenis body { height: auto; }
+html.lenis { scroll-behavior: auto; }
+.lenis.lenis-stopped { overflow: clip; }
 html.is-intro { overflow: hidden; }
 body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--body); -webkit-font-smoothing: antialiased; overflow-x: clip; }
 h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.05; margin: 0; color: var(--navy); }
@@ -61,8 +65,8 @@ canvas, img { display: block; max-width: 100%; }
 #intro.is-docking .mark { opacity: 1; }
 
 /* ── Nav ── */
-.nav { position: fixed; inset: 0 0 auto 0; z-index: 100; display: flex; align-items: center; gap: 28px; padding: 16px max(24px, calc((100vw - var(--wrap)) / 2)); transition: background .3s, padding .3s, box-shadow .3s; }
-.nav.is-solid { background: #fff; padding-block: 12px; box-shadow: 0 1px 0 var(--line); }
+.nav { position: fixed; inset: 0 0 auto 0; z-index: 100; display: flex; align-items: center; gap: 28px; padding: 16px max(24px, calc((100vw - var(--wrap)) / 2)); transition: background-color .3s var(--ease), box-shadow .3s var(--ease); }
+.nav.is-solid { background: #fff; box-shadow: 0 1px 0 var(--line); }
 .brand img { height: 32px; width: auto; }
 .nav-links { display: flex; gap: 24px; margin-left: auto; }
 .nav-links a { text-decoration: none; font: 500 .9375rem var(--body); color: var(--ink-2); padding: 8px 0; position: relative; white-space: nowrap; transition: color .16s var(--ease); }
@@ -78,8 +82,8 @@ canvas, img { display: block; max-width: 100%; }
 /* ── Stage ── */
 .stage { height: 430vh; position: relative; }
 .stage-pin { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: var(--paper); }
-#cloth { position: absolute; inset: 0; width: 100%; height: 100%; }
-.stage-tag { position: absolute; left: max(24px, calc((100vw - var(--wrap)) / 2)); bottom: calc(6vh + 40px); display: flex; font: 400 .8125rem var(--body); color: var(--grey); }
+#cloth { position: absolute; inset: 0; width: 100%; height: 100%; contain: strict; }
+.stage-tag { opacity: calc(1 - var(--p, 0) * 8); position: absolute; left: max(24px, calc((100vw - var(--wrap)) / 2)); bottom: calc(6vh + 40px); display: flex; font: 400 .8125rem var(--body); color: var(--grey); }
 .stage-tag span + span::before { content: "·"; margin: 0 8px; }
 .caps { position: absolute; left: 50%; transform: translateX(-50%); bottom: 6vh; width: min(820px, 100% - 48px); display: grid; pointer-events: none; text-align: center; }
 .cap { grid-area: 1 / 1; align-self: end; opacity: 0; transform: translateY(8px); transition: opacity .4s var(--ease), transform .4s var(--ease); }
@@ -364,7 +368,7 @@ address a:hover { text-decoration-color: var(--navy); }
 
 /* Standards ticker */
 .ticker { background: var(--navy); color: #fff; overflow: hidden; }
-.ticker-track { display: flex; gap: 40px; width: max-content; padding: 16px 0; animation: tick 50s linear infinite; font: 500 .9375rem var(--display); }
+.ticker-track { will-change: transform; display: flex; gap: 40px; width: max-content; padding: 16px 0; animation: tick 50s linear infinite; font: 500 .9375rem var(--display); }
 .ticker:hover .ticker-track { animation-play-state: paused; }
 .ticker-track span::before { content: ""; display: inline-block; width: 16px; height: 8px; margin-right: 40px; background: var(--stripes); color: var(--steel); }
 @keyframes tick { to { transform: translateX(-50%); } }
@@ -388,8 +392,8 @@ address a:hover { text-decoration-color: var(--navy); }
 #netMap .node .halo { opacity: .5; animation: halo 2.4s infinite; transform-box: fill-box; transform-origin: center; }
 #netMap .node.hq .halo { color: #fff; }
 @keyframes halo { to { transform: scale(2.8); opacity: 0; } }
-.net-list li { transition: padding .3s var(--ease), background-color .2s var(--ease); }
-.net-list li:hover, .net-list li.is-on { padding-left: 12px; }
+.net-list li > * { transition: transform .3s var(--ease); }
+.net-list li:hover > *, .net-list li.is-on > * { transform: translateX(12px); }
 
 /* Accreditation seals turn slowly, faster on hover */
 .seal svg { animation: spin 50s linear infinite; }
